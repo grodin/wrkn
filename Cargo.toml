@@ -1,0 +1,11 @@
+[package]
+name = "doing-rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["Joseph Cooper"]
+license = "MIT"
+
+
+[dependencies]
+color-eyre = "0.6.2"
+nom = "7.1.3"
