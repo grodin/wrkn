@@ -7,5 +7,9 @@ license = "MIT"
 
 
 [dependencies]
-color-eyre = "0.6.2"
+chrono = { version = "0.4.26", default-features = false, features = ["std", "clock"] }
 nom = "7.1.3"
+
+[dev-dependencies]
+proptest = "1.2.0"
+testresult = "0.3.0"
