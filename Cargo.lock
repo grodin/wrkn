@@ -260,19 +260,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "56254986775e3233ffa9c4d7d3faaf6d36a2c09d30b20687e9f88bc8bafc16c8"
 
 [[package]]
-name = "doing-rs"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "clap",
- "color-eyre",
- "nom",
- "pretty_assertions",
- "proptest",
- "testresult",
-]
-
-[[package]]
 name = "errno"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -991,6 +978,19 @@ name = "windows_x86_64_msvc"
 version = "0.48.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1a515f5799fe4961cb532f983ce2b23082366b898e52ffbce459c86f67c8378a"
+
+[[package]]
+name = "wrkn"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "clap",
+ "color-eyre",
+ "nom",
+ "pretty_assertions",
+ "proptest",
+ "testresult",
+]
 
 [[package]]
 name = "yansi"
