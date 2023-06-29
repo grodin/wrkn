@@ -3,8 +3,6 @@ use clap::Parser;
 use color_eyre::eyre;
 
 mod cli;
-mod doing;
-mod parser;
 
 fn main() -> eyre::Result<()> {
     let args = Cli::parse();
