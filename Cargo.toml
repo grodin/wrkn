@@ -1,10 +1,11 @@
 [package]
 name = "wrkn"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["Joseph Cooper"]
 license = "MIT"
 default-run = "wrkn"
+description = "Tool to save and retrieve quick reminders of what I've been working on"
 
 [dependencies]
 chrono = { version = "0.4.26", default-features = false, features = ["std", "clock"] }
