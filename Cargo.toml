@@ -4,18 +4,22 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Joseph Cooper"]
 license = "MIT"
-
+default-run = "wrkn"
 
 [dependencies]
 chrono = { version = "0.4.26", default-features = false, features = ["std", "clock"] }
 clap = { version = "4.3.9", features = ["derive", "cargo", "env", "unicode"] }
 color-eyre = "0.6.2"
+directories = "5.0.1"
 nom = "7.1.3"
+once_cell = "1.18.0"
 
 [[bin]]
 name = "importer"
 
 [dev-dependencies]
 pretty_assertions = "1.3.0"
-proptest = "1.2.0"
 testresult = "0.3.0"
+fake = { version = "2.6.1", features = ["chrono", "rand_core"] }
+proptest = "1.2.0"
+rand = { version = "0.8.5", features = ["small_rng"] }

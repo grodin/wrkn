@@ -1,4 +1,4 @@
-use chrono::NaiveDateTime;
+use chrono::{DateTime, TimeZone, Utc};
 use nom::bytes::complete::take_till;
 use nom::character::complete::{char, digit1, multispace0, multispace1};
 use nom::combinator::{map, map_res, recognize, value};
@@ -17,15 +17,15 @@ pub(crate) fn parse_entry(input: &str) -> IResult<&str, Entry> {
         input,
         Entry {
             timestamp,
-            content: content.to_string(),
+            title: content.to_string(),
         },
     ))
 }
 
-fn parse_timestamp(input: &str) -> IResult<&str, NaiveDateTime> {
+fn parse_timestamp(input: &str) -> IResult<&str, DateTime<Utc>> {
     map_res(
         recognize(separated_pair(parse_date, multispace1, parse_time)),
-        |s| NaiveDateTime::parse_from_str(s, "%Y-%m-%d %H:%M"),
+        |s| Utc.datetime_from_str(s, "%Y-%m-%d %H:%M"),
     )(input)
 }
 
@@ -70,7 +70,6 @@ where
 
 #[cfg(test)]
 mod tests {
-    use chrono::NaiveDate;
     use pretty_assertions::assert_eq;
     use testresult::TestResult;
 
@@ -81,11 +80,8 @@ mod tests {
         let input = "	- 2023-06-23 17:43 | Trying to get feeds-to-pocket to work on @rpi4 <fd400be709811adec539009fd903f1b9>";
         let (_remainder, result) = parse_entry(input)?;
         let expected = Entry {
-            timestamp: NaiveDate::from_ymd_opt(2023, 6, 23)
-                .unwrap()
-                .and_hms_opt(17, 43, 0)
-                .unwrap(),
-            content: "Trying to get feeds-to-pocket to work on @rpi4".to_string(),
+            timestamp: Utc.with_ymd_and_hms(2023, 6, 23, 17, 43, 0).unwrap(),
+            title: "Trying to get feeds-to-pocket to work on @rpi4".to_string(),
         };
         Ok(assert_eq!(result, expected))
     }
@@ -96,11 +92,8 @@ mod tests {
         let (remainder, result) = parse_entry(input)?;
         assert_eq!("", remainder);
         let expected = Entry {
-            timestamp: NaiveDate::from_ymd_opt(2023, 6, 23)
-                .unwrap()
-                .and_hms_opt(17, 43, 0)
-                .unwrap(),
-            content: "Trying to get feeds-to-pocket to work on @rpi4".to_string(),
+            timestamp: Utc.with_ymd_and_hms(2023, 6, 23, 17, 43, 0).unwrap(),
+            title: "Trying to get feeds-to-pocket to work on @rpi4".to_string(),
         };
         Ok(assert_eq!(result, expected))
     }
@@ -111,10 +104,7 @@ mod tests {
         let (remainder, timestamp) = parse_timestamp(input)?;
         assert_eq!("", remainder);
         assert_eq!(
-            NaiveDate::from_ymd_opt(2023, 6, 23)
-                .unwrap()
-                .and_hms_opt(17, 43, 0)
-                .unwrap(),
+            Utc.with_ymd_and_hms(2023, 6, 23, 17, 43, 0).unwrap(),
             timestamp
         );
         Ok(())
