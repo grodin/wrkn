@@ -8,7 +8,8 @@ mod config;
 
 fn main() -> eyre::Result<()> {
     let args = Cli::parse();
-    println!("{:?}", args);
+    #[cfg(debug_assertions)]
+    dbg!(&args);
     let config = Config::default();
     args.command.unwrap_or_default().run(&config)
 }

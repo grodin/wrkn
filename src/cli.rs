@@ -25,6 +25,7 @@ pub(crate) enum Command {
 
 impl Command {
     pub fn run(self, config: &Config) -> eyre::Result<()> {
+        #[cfg(debug_assertions)]
         dbg!(&self, &config);
         match self {
             Self::Recent(recent) => recent.run(config),
