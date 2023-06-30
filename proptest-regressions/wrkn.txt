@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 570512eb8bc2b9eb39dd54c047ae3ef078229be6454f22a3c06f7464d2182ebc # shrinks to ef = Entry { timestamp: 2231-06-27T16:14:55.967107212Z, title: "laudantium eveniet earum officia blanditiis qui illum reiciendis facilis." }
