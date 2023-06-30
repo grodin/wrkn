@@ -1,9 +1,9 @@
 use crate::cli::RunnableCommand;
 use crate::config::Config;
 use clap::Args;
-use std::fs::File;
-use std::io;
+use itertools::Itertools;
 use wrkn::file;
+use wrkn::wrkn::{sort_entries_by_timestamp, Entry};
 
 #[derive(Debug, Args)]
 pub(crate) struct RecentCommand {
@@ -14,14 +14,11 @@ pub(crate) struct RecentCommand {
 
 impl RunnableCommand for RecentCommand {
     fn run(self, config: &Config) -> color_eyre::Result<()> {
-        dbg!(&self, &config);
-        if config.wrkn_file.try_exists()? {
-            let mut f = io::BufReader::new(File::open(&config.wrkn_file)?);
-            file::read_wrkn_file(&mut f)?
-                .iter()
-                .take(self.count as usize)
-                .for_each(|entry| println!("{}", entry))
-        }
-        Ok(())
+        let entries: Vec<Entry> = file::read_wrkn_file(&config.wrkn_file)?
+            .into_iter()
+            .take(self.count as usize)
+            .sorted_by_key(sort_entries_by_timestamp)
+            .collect();
+        Ok(entries.iter().for_each(|entry| println!("{}", entry)))
     }
 }

@@ -1,6 +1,7 @@
 mod parser;
 
 pub(crate) use parser::SEPARATOR;
+use std::cmp::Reverse;
 use std::fmt::{Display, Formatter};
 
 use crate::wrkn::parser::parse_wrkn_entry;
@@ -35,6 +36,14 @@ impl Display for Entry {
         let timestamp = self.timestamp.to_rfc3339_opts(SecondsFormat::Secs, true);
         write!(f, "{timestamp}{SEPARATOR}{}", self.title)
     }
+}
+
+pub fn sort_entries_by_timestamp_reverse(e: &Entry) -> impl Ord {
+    Reverse(e.timestamp)
+}
+
+pub fn sort_entries_by_timestamp(e: &Entry) -> impl Ord {
+    e.timestamp
 }
 
 #[cfg(test)]
