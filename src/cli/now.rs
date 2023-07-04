@@ -1,10 +1,10 @@
 use crate::cli::RunnableCommand;
 use crate::config::Config;
+use crate::file::{read_wrkn_file, save_wrkn_file};
+use crate::wrkn::Entry;
 use chrono::{Timelike, Utc};
 use clap::Args;
 use itertools::Itertools;
-use wrkn::file::{read_wrkn_file, save_wrkn_file};
-use wrkn::wrkn::Entry;
 
 #[derive(Debug, Args)]
 pub(crate) struct NowCommand {

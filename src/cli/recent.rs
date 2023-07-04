@@ -1,13 +1,13 @@
 use crate::cli::RunnableCommand;
 use crate::config::Config;
+use crate::file::read_wrkn_file;
+use crate::wrkn::{sort_entries_by_timestamp, Entry};
 use chrono_humanize::HumanTime;
 use clap::Args;
 use itertools::Itertools;
 use owo_colors::{OwoColorize, Stream};
 use std::io;
 use std::io::{stdout, Write};
-use wrkn::file;
-use wrkn::wrkn::{sort_entries_by_timestamp, Entry};
 
 #[derive(Debug, Args)]
 pub(crate) struct RecentCommand {
@@ -18,7 +18,7 @@ pub(crate) struct RecentCommand {
 
 impl RunnableCommand for RecentCommand {
     fn run(self, config: &Config) -> color_eyre::Result<()> {
-        let entries: Vec<Entry> = file::read_wrkn_file(&config.wrkn_file)?
+        let entries: Vec<Entry> = read_wrkn_file(&config.wrkn_file)?
             .into_iter()
             .take(self.count as usize)
             .sorted_by_key(sort_entries_by_timestamp)

@@ -5,6 +5,8 @@ use color_eyre::eyre;
 
 mod cli;
 mod config;
+mod file;
+mod wrkn;
 
 fn main() -> eyre::Result<()> {
     let args = Cli::parse();
