@@ -20,6 +20,7 @@ impl RunnableCommand for NowCommand {
             timestamp: Utc::now().with_nanosecond(0).unwrap(),
             title: self.title.into_iter().join(" "),
         };
+        #[cfg(debug_assertions)]
         dbg!(&new_entry);
         entries.push(new_entry.clone());
         save_wrkn_file(&config.wrkn_file, &mut entries)?;
