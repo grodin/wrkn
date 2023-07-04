@@ -1,10 +1,12 @@
 use crate::cli::now::NowCommand;
+use crate::cli::open::OpenCommand;
 use crate::cli::recent::RecentCommand;
 use crate::config::Config;
 use clap::{Parser, Subcommand};
 use color_eyre::eyre;
 
 mod now;
+mod open;
 mod recent;
 
 /// Simple tool to record what I was just doing
@@ -21,6 +23,8 @@ pub(crate) enum Command {
     Recent(RecentCommand),
     /// Adds an entry with the current time
     Now(NowCommand),
+    /// Opens the wrkn file in the default editor
+    Open(OpenCommand),
 }
 
 impl Command {
@@ -30,6 +34,7 @@ impl Command {
         match self {
             Self::Recent(recent) => recent.run(config),
             Self::Now(now) => now.run(config),
+            Self::Open(open) => open.run(config),
         }
     }
 }
