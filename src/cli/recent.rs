@@ -27,6 +27,7 @@ impl RunnableCommand for RecentCommand {
         for entry in entries {
             pretty_print(&mut stdout, &entry)?;
         }
+        stdout.flush()?;
         Ok(())
     }
 }
