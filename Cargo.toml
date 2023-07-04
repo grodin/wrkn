@@ -9,12 +9,14 @@ description = "Tool to save and retrieve quick reminders of what I've been worki
 
 [dependencies]
 chrono = { version = "0.4.26", default-features = false, features = ["std", "clock"] }
+chrono-humanize = "0.2.2"
 clap = { version = "4.3.9", features = ["derive", "cargo", "env", "unicode"] }
 color-eyre = "0.6.2"
 directories = "5.0.1"
 itertools = "0.11.0"
 nom = "7.1.3"
 once_cell = "1.18.0"
+owo-colors = { version = "3.5.0", features = ["supports-colors"] }
 
 [[bin]]
 name = "importer"
