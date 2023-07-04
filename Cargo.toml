@@ -1,6 +1,6 @@
 [package]
 name = "wrkn"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 authors = ["Joseph Cooper"]
 license = "MIT"
@@ -17,9 +17,6 @@ itertools = "0.11.0"
 nom = "7.1.3"
 once_cell = "1.18.0"
 owo-colors = { version = "3.5.0", features = ["supports-colors"] }
-
-[[bin]]
-name = "importer"
 
 [dev-dependencies]
 pretty_assertions = "1.3.0"
