@@ -4,6 +4,7 @@ use crate::cli::recent::RecentCommand;
 use crate::config::Config;
 use clap::{Parser, Subcommand};
 use color_eyre::eyre;
+use std::path::PathBuf;
 
 mod now;
 mod open;
@@ -13,6 +14,10 @@ mod recent;
 #[derive(Debug, Parser)]
 #[command(author, version, about, infer_subcommands = true)]
 pub(crate) struct Cli {
+    /// Location of entries file. It will be created as needed if it doesn't exist.
+    #[arg(long, short, value_name = "FILE", value_hint = clap::ValueHint::DirPath)]
+    pub(crate) file: Option<PathBuf>,
+
     #[command(subcommand)]
     pub(crate) command: Option<Command>,
 }

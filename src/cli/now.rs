@@ -15,7 +15,7 @@ pub(crate) struct NowCommand {
 
 impl RunnableCommand for NowCommand {
     fn run(self, config: &Config) -> color_eyre::Result<()> {
-        let mut entries = read_wrkn_file(&config.wrkn_file)?;
+        let mut entries = read_wrkn_file(&config.entries_file)?;
         let new_entry = Entry {
             timestamp: Utc::now().with_nanosecond(0).unwrap(),
             title: self.title.into_iter().join(" "),
@@ -23,11 +23,11 @@ impl RunnableCommand for NowCommand {
         #[cfg(debug_assertions)]
         dbg!(&new_entry);
         entries.push(new_entry.clone());
-        save_wrkn_file(&config.wrkn_file, &mut entries)?;
+        save_wrkn_file(&config.entries_file, &mut entries)?;
         println!(
             "Added \"{}\" to wrkn file {} at {}",
             &new_entry.title,
-            &config.wrkn_file.display(),
+            &config.entries_file.display(),
             &new_entry.timestamp
         );
         Ok(())

@@ -2,7 +2,7 @@ use std::path::{Path, PathBuf};
 
 #[derive(Debug)]
 pub struct Config {
-    pub wrkn_file: PathBuf,
+    pub entries_file: PathBuf,
 }
 
 static DEFAULT_FILE_NAME: &str = "wrkn_file";

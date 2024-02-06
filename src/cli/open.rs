@@ -7,7 +7,7 @@ pub(crate) struct OpenCommand {}
 
 impl RunnableCommand for OpenCommand {
     fn run(self, config: &Config) -> color_eyre::Result<()> {
-        edit::edit_file(&config.wrkn_file)?;
+        edit::edit_file(&config.entries_file)?;
         Ok(())
     }
 }

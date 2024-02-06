@@ -18,7 +18,7 @@ pub(crate) struct RecentCommand {
 
 impl RunnableCommand for RecentCommand {
     fn run(self, config: &Config) -> color_eyre::Result<()> {
-        let entries: Vec<Entry> = read_wrkn_file(&config.wrkn_file)?
+        let entries: Vec<Entry> = read_wrkn_file(&config.entries_file)?
             .into_iter()
             .take(self.count as usize)
             .sorted_by_key(sort_entries_by_timestamp)
