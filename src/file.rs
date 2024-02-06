@@ -14,7 +14,7 @@ pub fn write_wrkn_file(mut out: impl Write, data: &mut [Entry]) -> eyre::Result<
 }
 
 pub fn save_wrkn_file<P: AsRef<Path>>(path: P, data: &mut [Entry]) -> eyre::Result<()> {
-    let f = BufWriter::new(OpenOptions::new().write(true).open(&path)?);
+    let f = BufWriter::new(OpenOptions::new().write(true).create(true).open(&path)?);
     write_wrkn_file(f, data)
 }
 
