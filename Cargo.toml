@@ -6,6 +6,8 @@ authors = ["Joseph Cooper"]
 license = "MIT"
 default-run = "wrkn"
 description = "Tool to save and retrieve quick reminders of what I've been working on"
+homepage = "https://github.com/grodin/wrkn"
+repository = "https://github.com/grodin/wrkn"
 
 [dependencies]
 chrono = { version = "0.4.26", default-features = false, features = ["std", "clock"] }
