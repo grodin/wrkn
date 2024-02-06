@@ -25,3 +25,6 @@ testresult = "0.3.0"
 fake = { version = "2.6.1", features = ["chrono", "rand_core"] }
 proptest = "1.2.0"
 rand = { version = "0.8.5", features = ["small_rng"] }
+assert_cmd = { version = "2.0.13", default-features = false }
+assert_fs = { version = "1.1.1" , default-features = false}
+predicates = { version = "3.1.0", default-features = false }
