@@ -12,6 +12,6 @@ fn main() -> eyre::Result<()> {
     let args = Cli::parse();
     #[cfg(debug_assertions)]
     dbg!(&args);
-    let config = Config::default();
+    let config = Config::from_args(&args)?;
     args.command.unwrap_or_default().run(&config)
 }
