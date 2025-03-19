@@ -10,6 +10,7 @@ homepage = "https://github.com/grodin/wrkn"
 repository = "https://github.com/grodin/wrkn"
 
 [dependencies]
+atomicwrites = "0.4.4"
 chrono = { version = "0.4.26", default-features = false, features = ["std", "clock"] }
 chrono-humanize = "0.2.2"
 clap = { version = "4.3.9", features = ["derive", "cargo", "env", "unicode"] }
