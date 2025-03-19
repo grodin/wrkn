@@ -5,6 +5,7 @@ use nom::character::complete::char;
 use nom::combinator::{map_res, recognize, rest, value};
 use nom::sequence::terminated;
 use nom::IResult;
+use nom::Parser;
 
 pub(crate) static SEPARATOR: &str = " | ";
 
@@ -25,11 +26,12 @@ fn datetime(i: &str) -> IResult<&str, DateTime<Utc>> {
     map_res(
         recognize(terminated(is_a("01234567890-:T"), char('Z'))),
         |s: &str| s.parse(),
-    )(i)
+    )
+    .parse(i)
 }
 
 fn pipe(i: &str) -> IResult<&str, ()> {
-    value((), tag(" | "))(i)
+    value((), tag(" | ")).parse(i)
 }
 
 fn title(i: &str) -> IResult<&str, &str> {
