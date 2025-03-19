@@ -1,3 +1,4 @@
+use crate::cli::locate::LocateCommand;
 use crate::cli::now::NowCommand;
 use crate::cli::open::OpenCommand;
 use crate::cli::recent::RecentCommand;
@@ -6,6 +7,7 @@ use clap::{Parser, Subcommand};
 use color_eyre::eyre;
 use std::path::PathBuf;
 
+mod locate;
 mod now;
 mod open;
 mod recent;
@@ -30,6 +32,8 @@ pub(crate) enum Command {
     Now(NowCommand),
     /// Opens the wrkn file in the default editor
     Open(OpenCommand),
+    /// Shows the (canonicalized) path of the entries file
+    Locate(LocateCommand),
 }
 
 impl Command {
@@ -40,6 +44,7 @@ impl Command {
             Self::Recent(recent) => recent.run(config),
             Self::Now(now) => now.run(config),
             Self::Open(open) => open.run(config),
+            Self::Locate(locate) => locate.run(config),
         }
     }
 }
