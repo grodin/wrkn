@@ -1,6 +1,7 @@
 use assert_cmd::cargo::CargoError;
 use assert_cmd::Command;
-use assert_fs::NamedTempFile;
+use assert_fs::prelude::{FileWriteStr, PathChild, SymlinkToFile};
+use assert_fs::{NamedTempFile, TempDir};
 use predicates::prelude::predicate;
 use std::fs;
 use testresult::TestResult;
@@ -58,5 +59,30 @@ fn cmd_recent_can_read_file() -> TestResult {
         .success()
         .stdout(all_lines_predicate);
 
+    Ok(())
+}
+
+#[test]
+fn doesnt_overwrite_symlink() -> TestResult {
+    let temp_dir = TempDir::new()?;
+    let data_file = temp_dir.child("wrkn_on_data");
+    data_file.write_str(include_str!("./sample_file"))?;
+    let symlink_data_file = temp_dir.child("wrkn_on_symlink");
+    symlink_data_file.symlink_to_file(data_file.path())?;
+
+    let mut cmd = app_cmd_name()?;
+
+    cmd.args([
+        "--file",
+        &symlink_data_file.path().display().to_string(),
+        "now",
+        "Doing something",
+    ])
+    .assert()
+    .success();
+
+    let metadata = symlink_data_file.symlink_metadata()?;
+
+    assert!(metadata.file_type().is_symlink());
     Ok(())
 }
