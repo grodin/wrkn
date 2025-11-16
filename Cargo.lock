@@ -1555,7 +1555,7 @@ dependencies = [
 
 [[package]]
 name = "wrkn"
-version = "0.7.0"
+version = "0.7.2"
 dependencies = [
  "assert_cmd",
  "assert_fs",
